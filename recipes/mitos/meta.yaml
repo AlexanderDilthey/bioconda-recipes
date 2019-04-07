@@ -1,0 +1,67 @@
+{% set name = "mitos" %}
+{% set version = "1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 222d58b100e37887a073129ed79850526188511853b780dd3d11fc9a03c5f61c
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  host:
+    - biopython ==1.73
+    - ete2 ==2.3.10
+    - pip
+    - python <3
+  run:
+    - biopython ==1.73
+    - ete2 ==2.3.10
+    - python <3
+    - blast-legacy ==2.2.26
+    - r-base 
+    - r-ggplot ==3.1.1
+    - openjdk
+
+test:
+  imports:
+    - mitos
+    - mitos.align
+    - mitos.bedfile
+    - mitos.blast
+    - mitos.codon
+    - mitos.draw
+    - mitos.extprog
+    - mitos.feature
+    - mitos.gb
+    - mitos.gfffile
+    - mitos.mergefeature
+    - mitos.mitfi
+    - mitos.mito
+    - mitos.mitofile
+    - mitos.msa
+    - mitos.rEvoluzer
+    - mitos.rna
+    - mitos.sequence
+    - mitos.tax
+    - mitos.tbl
+    - mitos.trna
+    - mitos.update
+    - mitos.webserver
+
+about:
+  home: http://mitos.bioinf.uni-leipzig.de
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE 
+  summary: MITOS
+  dev_url: https://gitlab.com/Bernt/MITOS 
+
+extra:
+  recipe-maintainers:
+    - Bernt
